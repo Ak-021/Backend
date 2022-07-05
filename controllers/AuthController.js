@@ -26,7 +26,7 @@ let transpoter = nodemailer.createTransport({
 
 const registerUser = async (req, res) => {
     try {
-        let { name, surname, email, age, username, password } = req.body;
+        let { name, surname, email, age, username, password, roles } = req.body;
         const salt = await bcrypt.genSalt(10);
         password = await bcrypt.hash(password, salt);
         const newUser = new User({
@@ -36,6 +36,7 @@ const registerUser = async (req, res) => {
             email,
             username,
             password,
+            roles,
             verified: false,
         })
         newUser

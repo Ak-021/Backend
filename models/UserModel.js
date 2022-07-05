@@ -1,4 +1,5 @@
 const mongoose = require("mongoose")
+const Role = require('../models/RoleModel')
 const User = new mongoose.Schema({
     name: String,
     surname: String,
@@ -6,7 +7,12 @@ const User = new mongoose.Schema({
     age: Number,
     username: String,
     password: String,
-    roles: { type: Array, default: 'user' },
     verified: Boolean,
+    roles: [
+        {
+          type: mongoose.Schema.ObjectId,
+          ref: 'role',
+        },
+      ],
 })
 module.exports = mongoose.model('user', User)
